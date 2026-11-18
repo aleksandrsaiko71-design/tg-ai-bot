@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: tg-ai-bot
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      # AI-ключ можно не добавлять: без него включится бесплатный демо-режим.
+      # Чтобы подключить свой провайдер, добавьте в панели Render:
+      # AI_API_KEY, AI_BASE_URL, AI_MODEL.
+      - key: MAX_HISTORY
+        value: "24"
+      - key: LOG_LEVEL
+        value: INFO
